@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Algorithm.Extensions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Algorithm.Models.Tests
 {
@@ -11,6 +12,7 @@ namespace Algorithm.Models.Tests
             //Arrange
             BubbleSort<int> bubble = new();
             List<int> items = new();
+
             bubble.FillRandom(10, items);
 
             //Act
