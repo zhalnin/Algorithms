@@ -17,7 +17,8 @@ namespace Algorithm.Models.Tests
 
             //Act
             items.Sort();
-            bubble.Sort();
+            var timer = bubble.Sort();
+            Console.WriteLine(timer);
 
             //Assert
             for (int i = 0; i < items.Count; i++)

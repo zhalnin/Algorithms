@@ -3,7 +3,7 @@
 public class BubbleSort<T> : AlgorithmBase<T> 
     where T : IComparable<T> 
 {
-    public override void Sort()
+    protected override void MakeSort()
     {
         var count = Items.Count;
 
@@ -14,9 +14,10 @@ public class BubbleSort<T> : AlgorithmBase<T>
                 var itema = Items[i];
                 var itemb = Items[i + 1];
 
-                if (itema.CompareTo(itemb) == 1)
+                if (itema.CompareTo(itemb) > 0)
                 {
                     Swap(i, i + 1);
+                    ComparisonCount++;
                 }
             }
         }

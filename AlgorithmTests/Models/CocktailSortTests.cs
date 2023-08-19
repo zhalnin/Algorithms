@@ -17,8 +17,8 @@ public class CocktailSortTests
 
         //Act
         items.Sort();
-        cocktail.Sort();
-
+        var timer = cocktail.Sort();
+        Console.WriteLine(timer);
         //Assert
         for (int i = 0; i < items.Count; i++)
         {
