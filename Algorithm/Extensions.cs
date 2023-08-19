@@ -4,7 +4,7 @@ namespace Algorithm.Extensions;
 
 public static class ExtensionMethods
 {
-    public static void FillRandom<T>(this BubbleSort<T> bubble, int count, List<T>? list = null) 
+    public static void FillRandom<T>(this AlgorithmBase<T> sort, int count, List<T>? list = null) 
         where T : IComparable<T>
     {
         var rnd = new Random();
@@ -14,7 +14,7 @@ public static class ExtensionMethods
             {
                 var item = (T)(object)(rnd.Next(0, 100));
                 list?.Add(item);
-                bubble.Items.Add(item);
+                sort.Items.Add(item);
             }
         }
     }
