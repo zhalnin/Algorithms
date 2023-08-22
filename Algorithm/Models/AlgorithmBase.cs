@@ -8,6 +8,11 @@ public class AlgorithmBase<T>
     public int ComparisonCount { get; protected set; } = 0;
     public List<T> Items { get; set; } = new List<T>();
 
+    public AlgorithmBase() { }
+
+    public AlgorithmBase(IEnumerable<T> items) =>
+        Items.AddRange(items);
+
     protected void Swap(int positionA, int positionB)
     {
         if(positionA < Items.Count && positionB < Items.Count)
@@ -16,6 +21,14 @@ public class AlgorithmBase<T>
                 (Items[positionB], Items[positionA]);
 
             SwapCount++;
+        }
+    }
+
+    protected void Set(int position, T item)
+    {
+        if(position < Items.Count)
+        {
+            Items[position] = item;
         }
     }
 

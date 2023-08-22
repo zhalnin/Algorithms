@@ -1,4 +1,5 @@
-﻿using Algorithm.Extensions;
+﻿using Algorithm.DataStructures;
+using Algorithm.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Algorithm.Models.Tests;
@@ -45,6 +46,7 @@ public class SortingTests
         items.Sort();
         var timer = sortType.Sort();
         Console.WriteLine(timer);
+
         //Assert
         for (int i = 0; i < items.Count; i++)
         {
@@ -63,6 +65,7 @@ public class SortingTests
         items.Sort();
         var timer = sortType.Sort();
         Console.WriteLine(timer);
+
         //Assert
         for (int i = 0; i < items.Count; i++)
         {
@@ -81,6 +84,7 @@ public class SortingTests
         items.Sort();
         var timer = sortType.Sort();
         Console.WriteLine(timer);
+
         //Assert
         for (int i = 0; i < items.Count; i++)
         {
@@ -92,13 +96,14 @@ public class SortingTests
     public void TreeSortTest()
     {
         //Arrange
-        sortType = new TreeSort<int>();
+        sortType = new Tree<int>();
         sortType.FillRandom(10, items);
 
         //Act
         items.Sort();
         var timer = sortType.Sort();
         Console.WriteLine(timer);
+
         //Assert
         for (int i = 0; i < items.Count; i++)
         {
@@ -110,13 +115,33 @@ public class SortingTests
     public void HeapSortTest()
     {
         //Arrange
-        sortType = new HeapSort<int>();
+        sortType = new Heap<int>();
         sortType.FillRandom(10, items);
 
         //Act
         items.Sort();
         var timer = sortType.Sort();
         Console.WriteLine(timer);
+
+        //Assert
+        for (int i = 0; i < items.Count; i++)
+        {
+            Assert.AreEqual(items[i], sortType.Items[i]);
+        }
+    }
+
+    [TestMethod()]
+    public void SelectionSortTest()
+    {
+        //Arrange
+        sortType = new SelectionSort<int>();
+        sortType.FillRandom(10, items);
+
+        //Act
+        items.Sort();
+        var timer = sortType.Sort();
+        Console.WriteLine(timer);
+
         //Assert
         for (int i = 0; i < items.Count; i++)
         {
