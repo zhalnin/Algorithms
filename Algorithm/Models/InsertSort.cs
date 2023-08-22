@@ -1,7 +1,7 @@
 ﻿namespace Algorithm.Models;
 
 public class InsertSort<T> : AlgorithmBase<T> 
-    where T : IComparable<T>
+    where T : IComparable
 {
     protected override void MakeSort()
     {

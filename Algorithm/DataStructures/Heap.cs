@@ -1,41 +1,31 @@
-﻿using System.Collections;
+﻿using Algorithm.Models;
 
 namespace Algorithm.DataStructures;
 
-internal class Heap<T> where T : IComparable<T>
+public class Heap<T> : AlgorithmBase<T> 
+    where T : IComparable
 {
-    private List<T> _items = new List<T>();
-    public int Count => _items.Count;
+    public int Count => Items.Count;
 
     public Heap() { }
 
     public Heap(IEnumerable<T> items)
     {
-        _items.AddRange(items);
+        Items.AddRange(items);
         for (int i = Count; i >= 0; i--)
         {
             Sort(i);
         }
     }
 
-    public T Peek()
-    {
-        if (Count <= 0)
-        {
-            throw new ArgumentException(nameof(_items), "The heap is empty");
-        }
-
-        return _items[0];
-    }
-
     public void Add(T item)
     {
-        _items.Add(item);
+        Items.Add(item);
 
         var currentIndex = Count -1;
         var parentIndex = GetParentIndex(currentIndex);
 
-        while (currentIndex > 0 && _items[parentIndex].CompareTo(_items[currentIndex]) < 0)
+        while (currentIndex > 0 && Items[parentIndex].CompareTo(Items[currentIndex]) < 0)
         {
             Swap(currentIndex, parentIndex);
 
@@ -46,30 +36,32 @@ internal class Heap<T> where T : IComparable<T>
 
     public T GetMax()
     {
-        var result = _items[0];
-        _items[0] = _items[Count - 1];
-        _items.RemoveAt(Count - 1);
+        var result = Items[0];
+        Items[0] = Items[Count - 1];
+        Items.RemoveAt(Count - 1);
         Sort(0);
         return result;
     }
 
-    public void Sort(int currentIndex)
+    public void Sort(int currentIndex, int? maxLength = null)
     {
+        int maxIndex = currentIndex;
         int leftIndex;
         int rightIndex;
-        int maxIndex = currentIndex;
 
-        while (currentIndex < Count)
+        maxLength ??= Count;
+
+        while (currentIndex < maxLength)
         {
             leftIndex = GetLeftChildIndex(currentIndex);
             rightIndex = GetRightChildIndex(currentIndex);
 
-            if (leftIndex < Count && _items[leftIndex].CompareTo(_items[maxIndex]) < 0)
+            if (leftIndex < maxLength && Items[leftIndex].CompareTo(Items[maxIndex]) > 0)
             {
                 maxIndex = leftIndex;
             }
 
-            if (rightIndex < Count && _items[rightIndex].CompareTo(_items[maxIndex]) < 0)
+            if (rightIndex < maxLength && Items[rightIndex].CompareTo(Items[maxIndex]) > 0)
             {
                 maxIndex = rightIndex;
             }
@@ -84,20 +76,18 @@ internal class Heap<T> where T : IComparable<T>
         }
     }
 
-    private void Swap(int currentIndex, int parentIndex) =>
-        (_items[currentIndex], _items[parentIndex]) = (_items[parentIndex], _items[currentIndex]);
-
     private int GetLeftChildIndex(int currentIndex) => 2 * currentIndex + 1;
 
     private int GetRightChildIndex(int currentIndex) => 2 * currentIndex + 2;
 
     private int GetParentIndex(int currentIndex) => (currentIndex - 1) / 2;
 
-    public IEnumerable<T> Order()
+    protected override void MakeSort()
     {
-        while(Count > 0)
+        for (int i = Count - 1; i >= 0; i--)
         {
-            yield return GetMax();
+            Swap(0, i);
+            Sort(0, i);
         }
     }
 }

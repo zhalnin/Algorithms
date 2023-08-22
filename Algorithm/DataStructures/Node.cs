@@ -1,37 +1,40 @@
 ﻿namespace Algorithm.DataStructures;
 
-internal class Node<T> : IComparable<T>, IComparable where T : IComparable
+public class Node<T> where T : IComparable<T>, IComparable
 {
     public T Data { get; set; }
     public Node<T> Left { get; private set; }
     public Node<T> Right { get; private set; }
+    public int Index { get; set; }
 
     public Node(T data) =>
         Data = data;
 
-    public void Add(T data)
+    public Node(T data, int index) =>
+        (Data, Index) = (data, index);
+
+    public void Add(Node<T> node, Node<T> newNode)
     {
-        var node = new Node<T>(data);
-        if (node.Data.CompareTo(Data) < 0)
+        if (node.Data.CompareTo(newNode.Data) > 0)
         {
             if (Left is null)
             {
-                Left = node;
+                Left = newNode;
             }
             else
             {
-                Left.Add(data);
+                Left.Add(node.Left, newNode);
             }
         }
         else
         {
             if (Right is null)
             {
-                Right = node;
+                Right = newNode;
             }
             else
             {
-                Right.Add(data);
+                Right.Add(node.Right, newNode);
             }
         }
     }
