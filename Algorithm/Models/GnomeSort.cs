@@ -9,7 +9,7 @@ where T : IComparable
 
         while(j < Items.Count)
         {
-            if(j.Equals(0) || Items[j].CompareTo(Items[j - 1]) > 0)
+            if(j.Equals(0) || Items[j].CompareTo(Items[j - 1]) >= 0)
             {
                 j++;
             }
