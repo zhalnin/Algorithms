@@ -17,7 +17,6 @@ public class BubbleSort<T> : AlgorithmBase<T>
                 if (itema.CompareTo(itemb) > 0)
                 {
                     Swap(i, i + 1);
-                    ComparisonCount++;
                 }
             }
         }

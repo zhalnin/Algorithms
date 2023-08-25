@@ -16,7 +16,6 @@ public class CocktailSort<T> : AlgorithmBase<T>
                 if (Items[i].CompareTo(Items[i+1]) > 0)
                 {
                     Swap(i, i+1);
-                    ComparisonCount++;
                 }
             }
             right--;
@@ -27,7 +26,6 @@ public class CocktailSort<T> : AlgorithmBase<T>
                 if (Items[i].CompareTo(Items[i-1]) < 0)
                 {
                     Swap(i, i-1);
-                    ComparisonCount++;
                 }
             }
             left++;

@@ -7,6 +7,7 @@ namespace Algorithm.Models.Tests;
 [TestClass()]
 public class SortingTests
 {
+    private readonly int rndCount = 10;
     readonly List<int> items = new();
     AlgorithmBase<int> sortType = new();
 
@@ -21,7 +22,7 @@ public class SortingTests
     {
         //Arrange
         sortType = new BubbleSort<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
 
         //Act
         items.Sort();
@@ -40,7 +41,7 @@ public class SortingTests
     {
         //Arrange
         sortType = new CocktailSort<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
 
         //Act
         items.Sort();
@@ -59,7 +60,7 @@ public class SortingTests
     {
         //Arrange
         sortType = new InsertSort<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
 
         //Act
         items.Sort();
@@ -78,7 +79,7 @@ public class SortingTests
     {
         //Arrange
         sortType = new ShellSort<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
 
         //Act
         items.Sort();
@@ -97,7 +98,7 @@ public class SortingTests
     {
         //Arrange
         sortType = new Tree<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
 
         //Act
         items.Sort();
@@ -116,7 +117,7 @@ public class SortingTests
     {
         //Arrange
         sortType = new Heap<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
 
         //Act
         items.Sort();
@@ -135,7 +136,7 @@ public class SortingTests
     {
         //Arrange
         sortType = new SelectionSort<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
 
         //Act
         items.Sort();
@@ -154,7 +155,7 @@ public class SortingTests
     {
         //Arrange
         sortType = new GnomeSort<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
 
         //Act
         items.Sort();
@@ -173,7 +174,26 @@ public class SortingTests
     {
         //Arrange
         sortType = new LsdRadixSort<int>();
-        sortType.FillRandom(10, items);
+        sortType.FillRandom(rndCount, items);
+
+        //Act
+        items.Sort();
+        var timer = sortType.Sort();
+        Console.WriteLine(timer);
+
+        //Assert
+        for (int i = 0; i < items.Count; i++)
+        {
+            Assert.AreEqual(items[i], sortType.Items[i]);
+        }
+    }
+    
+    [TestMethod()]
+    public void MsdRadixSortTest()
+    {
+        //Arrange
+        sortType = new MsdRadixSort<int>();
+        sortType.FillRandom(rndCount, items,0,1000);
 
         //Act
         items.Sort();
