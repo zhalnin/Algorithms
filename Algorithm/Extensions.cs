@@ -5,7 +5,7 @@ namespace Algorithm.Extensions;
 
 public static class ExtensionMethods
 {
-    public static void FillRandom<T>(this AlgorithmBase<T> sort, int count, List<T>? list = null)
+    public static void FillRandom<T>(this AlgorithmBase<T> sort, int count, List<T>? list = null, int minValue = 0, int maxValue = 100)
         where T : IComparable<T>, IComparable
     {
         var rnd = new Random();
@@ -14,7 +14,7 @@ public static class ExtensionMethods
         {
             for (int i = 0; i < count; i++)
             {
-                var item = (T)(object)(rnd.Next(0, 100));
+                var item = (T)(object)(rnd.Next(minValue, maxValue));
                 list?.Add(item);
                 sort.Items.Add(item);
 

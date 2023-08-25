@@ -13,8 +13,6 @@ public class InsertSort<T> : AlgorithmBase<T>
             {
                 Items[j] = Items[j - 1];
                 j--;
-                SwapCount++;
-                ComparisonCount++;
             }
             Items[j] = temp;
         }
